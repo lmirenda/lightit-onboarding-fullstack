@@ -1,0 +1,16 @@
+[
+    {
+      "firstName": "John",
+      "lastName": "Doe",
+      "age": 50,
+      "email": "john@doe.com",
+      "roles": ["Professor", "Programmer"]
+    },
+    {
+      "firstName": "Foo",
+      "lastName": "Bar",
+      "age" : 20,
+      "email": "foo@bar.com",
+      "roles": ["Student", "Intern"]
+    }
+  ]

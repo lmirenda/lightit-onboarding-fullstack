@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CURL a very hungry HTTP client</title>
+</head>
+<body>
+    <h1>CURL a very hungry HTTP client</h1>
+    <h2>Command</h2>
+    <span>curl -i https://api.github.com/test</span>
+    <p>curl: Stands for client URL. Its used to transfer data from and to a server using the command line or scripts.</p>
+    <p> -i: stands for --include. Shows hidden response headers of the HTTP reply.</p>
+    <p>https://api.github.com/test: The url where the GET request is issued and recieves the document that was asked for.</p>
+    <h2>Command output</h2>
+    <img src="CURL a very hungry HTTP client.png" alt="terminal output">
+    <p>The image shows the request HTTP response message</p>
+    <h3>Status line</h3>
+    <p>HTTP/2 404: Error for not found</p>
+    <h3>Response headers</h3>
+    <ul>
+        <li>server</li>
+        <li>date</li>
+        <li>content-type</li>
+        <li>...</li>
+        <li>x-github-request-id</li>
+    </ul>
+    <h3>Response msg body</h3>
+    <p>A blank line separates the header and body from the Message Body.</p>
+</body>
+</html>
