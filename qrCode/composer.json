@@ -1,0 +1,12 @@
+{
+    "name": "lucamirenda/third-challenge",
+    "authors": [
+        {
+            "name": "lmirenda",
+            "email": "lucamateomirenda@gmail.com"
+        }
+    ],
+    "require": {
+        "endroid/qr-code": "^4.4"
+    }
+}
