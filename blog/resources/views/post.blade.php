@@ -1,16 +1,20 @@
-<!doctype html>
+{{-- @extends('layout')
+@section('content')
+<article>
+    <h1> {{$post->title; }}</h1>
+   {!! $post->body !!}
 
-<title>My blog</title>
-<link rel="stylesheet" href="/app.css">
+</article>
 
-<body>
+<a href="/">Go back</a>
+@endsection --}}
+
+<x-layout>
     <article>
-        <h1> <?= $post->title; ?></h1>
-       <?= $post->body; ?> 
-
-    </article>
-
-    <a href="/">Go back</a>
+        <h1> {{$post->title; }}</h1>
+       {!! $post->body !!}
     
-    <script src="app.js"></script>
-</body>
+    </article>
+    
+    <a href="/">Go back</a>
+</x-layout>
