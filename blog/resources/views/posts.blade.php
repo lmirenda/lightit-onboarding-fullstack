@@ -1,36 +1,17 @@
-{{-- @extends('layout')
-
-@section('content')
-
-    @foreach ($posts as $post)
-        <article>
-            
-            <h1>
-                <a href="/posts/<?= $post->slug;?>">
-                    {{ $post->title }}
-                </a>
-            </h1>
-            
-            {!! $post->body !!}
-            
-        </article>
-    @endforeach;
-
-@endsection() --}}
-
-
 <x-layout>
     @foreach ($posts as $post)
         <article>
             
             <h1>
-                <a href="/posts/<?= $post->slug;?>">
-                    {{ $post->title }}
-                </a>
+                <a href="/posts/{{ $post->slug }}">{{ $post->title }}</a>
             </h1>
+
+            <h4>
+                By <a href="/authors/{{ $post->author->username }}">{{ $post->author->name }}</a> in <a href="/categories/{{$post->category->slug}}"> {{ $post->category->name }} </a>
+            </h4>
             
-            {!! $post->body !!}
+            {!! $post->excerpt !!}
             
         </article>
-    @endforeach;
+    @endforeach
 </x-layout>
