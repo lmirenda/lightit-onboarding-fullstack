@@ -10,8 +10,16 @@ class City extends Model
 {
     use HasFactory;
 
-    public function flight() 
+    public function arrivingFlight() 
     {
-        return $this->hasMany(Flight::class);
+        return $this->hasMany(Flight::class, 'destination_city_id');
+    }
+    public function departingFlight() 
+    {
+        return $this->hasMany(Flight::class, 'origin_city_id');
+    }
+    public function totalFlights()
+    {
+        // TODO concatenate arriving and departing flights
     }
 }

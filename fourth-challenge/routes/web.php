@@ -1,18 +1,28 @@
 <?php
 
+use App\Models\City;
+use App\Models\Flight;
+use App\Models\Company;
 use Illuminate\Support\Facades\Route;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/manage/cities', function(City $cities) {
+    return view('cities', [
+        'cities' => City::all()
+    ]);
+});
+
+Route::get('/manage/companies', function(Company $companies) {
+    return view('companies', [
+        'companies' => Company::all()
+    ]);
+});
+
+Route::get('/manage/flights', function(Flight $flights) {
+    return view('flights', [
+        'flights' => Flight::all()
+    ]);
 });

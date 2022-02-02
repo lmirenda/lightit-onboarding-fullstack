@@ -17,7 +17,7 @@ class CreateFlightsTable extends Migration
             $table->id();
             $table->string('name');
             $table->foreignId('origin_city_id')->references('id')->on('cities');
-            $table->foreignId('destination_city_id')->references('id')->on('cities');
+            $table->foreignId('destination_city_id')->constrained('cities');
             $table->foreignId('company_id')->constrained();
             $table->dateTime('departure');
             $table->dateTime('arrival');

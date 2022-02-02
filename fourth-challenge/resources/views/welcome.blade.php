@@ -1,3 +1,4 @@
 <x-layout>
-    hello world
+    welcome page
+
 </x-layout>
