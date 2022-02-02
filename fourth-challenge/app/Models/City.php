@@ -20,6 +20,6 @@ class City extends Model
     }
     public function totalFlights()
     {
-        // TODO concatenate arriving and departing flights
+        // TODO concatenate arriving and departing flights.
     }
 }
