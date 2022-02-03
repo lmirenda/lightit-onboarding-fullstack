@@ -10,6 +10,8 @@ class City extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['name'];
+
     public function arrivingFlight() 
     {
         return $this->hasMany(Flight::class, 'destination_city_id');
@@ -18,8 +20,5 @@ class City extends Model
     {
         return $this->hasMany(Flight::class, 'origin_city_id');
     }
-    public function totalFlights()
-    {
-        // TODO concatenate arriving and departing flights.
-    }
+    
 }

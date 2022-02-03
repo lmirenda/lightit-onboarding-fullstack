@@ -11,10 +11,18 @@ class CompanyFactory extends Factory
      *
      * @return array
      */
+    
     public function definition()
     {
+        $suffix = [' Corp.', ' Inc.', ' PBC', ' Ltd.', ' Co.', ' Airways', ' Airline'];
         return [
-            'name' => $this->faker->name()
+            'name' => $this->faker->company() . $suffix[rand(0,count($suffix)-1)]
         ];
     }
+
+    public function company() 
+    {
+
+    }
+
 }
