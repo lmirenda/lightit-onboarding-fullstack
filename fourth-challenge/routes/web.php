@@ -1,8 +1,8 @@
 <?php
 
-use App\Models\Flight;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CityController;
+use App\Http\Controllers\FlightController;
 use App\Http\Controllers\CompanyController;
 
 Route::get('/', function () {
@@ -13,8 +13,10 @@ Route::get('/manage/cities', [CityController::class, 'index']);
 
 Route::get('/manage/companies', [CompanyController::class, 'index']);
 
-Route::get('/manage/flights', function(Flight $flights) {
-    return view('flights', [
-        'flights' => Flight::all()
-    ]);
-});
+Route::get('/manage/flights', [FlightController::class, 'index']);
+
+Route::post('/manage/cities/create', [CityController::class, 'store']);
+
+Route::post('/manage/companies/create', [CompanyController::class, 'store']);
+
+Route::post('/manage/flights/create', [FlightController::class, 'store']);

@@ -9,8 +9,20 @@ class CompanyController extends Controller
 {
     public function index()
     {
-        return view('companies', [
-            'companies' => Company::all()->sortBy('name')
+        $companies = Company::all()->sortBy('name');
+
+        return view('companies', ['companies' => $companies]);
+    }
+
+    public function store(Company $company, Request $request)
+    {
+        $request->validate([
+            'name' => 'required|unique:companies'
         ]);
+
+        $company->create([
+            'name' => $request->input('name')
+        ]);
+        return back();
     }
 }
