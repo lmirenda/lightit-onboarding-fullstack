@@ -6,7 +6,7 @@
     
             <input type="text" placeholder="City Name" name="name">
     
-            <button type="submit">
+            <button type="submit" class="bg-red-500 px-2 py-2">
                 Register new City
             </button>
         </form>

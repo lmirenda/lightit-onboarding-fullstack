@@ -4,6 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+
 </head>
 <body class="bg-gradient-to-r from-slate-50 to-white">
     <nav class="flex items-center justify-between flex-wrap bg-indigo-400 p-6">
@@ -33,6 +35,7 @@
         </div>
       </nav>
       {{ $slot }}    
+      
 
 </body>
 </html>
