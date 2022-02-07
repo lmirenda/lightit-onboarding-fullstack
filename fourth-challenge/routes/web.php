@@ -17,7 +17,7 @@ Route::get('/manage/flights', [FlightController::class, 'index']);
 
 Route::get('/list/flights', [FlightController::class, 'index']);
 
-Route::post('/manage/cities/create', [CityController::class, 'store']);
+Route::post('/manage/cities', [CityController::class, 'store']);
 
 Route::post('/manage/companies/create', [CompanyController::class, 'store']);
 

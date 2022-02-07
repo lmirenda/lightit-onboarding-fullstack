@@ -14,16 +14,16 @@ class CityController extends Controller
         return view('cities', ['cities' => $cities]);
     }
 
-    public function store(City $city, Request $request)
+    public function store(Request $request)
     {
         $request->validate([
             'name' => 'required|unique:cities'
         ]);
 
-        $city->create([
+        $city = City::create([
             'name' => $request->input('name')
         ]);
 
-        return back();
+        return $city;
     }
 }
