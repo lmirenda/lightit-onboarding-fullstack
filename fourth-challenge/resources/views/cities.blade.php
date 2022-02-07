@@ -28,12 +28,21 @@
         $( document ).ready(function(){
             $('#add-city-form').on('submit', function(e){
                 e.preventDefault();
-                console.log('click')
                 var form = this;
                 $.ajax({
                     url:$(form).attr('action'),
                     method:$(form).attr('method'),
-                    data: $(form).serialize()
+                    data: $(form).serialize(),
+                    success: function updateDiv(data)
+                    { 
+                        $('#city-list').prepend(
+                            `<span>
+                                ${data.name}
+                                <br>
+                            </span>`
+                        );
+                        $(form)[0].reset();
+                    }
                 });
             });
         });
