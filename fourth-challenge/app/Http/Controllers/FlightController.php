@@ -14,7 +14,7 @@ class FlightController extends Controller
         return view('flights', ['flights' => $flights]);
     }
 
-    public function store(Flight $flight, Request $request)
+    public function store(Request $request)
     {
         $request->validate([
             'origin_city_id' => 'required',
@@ -23,13 +23,16 @@ class FlightController extends Controller
             'departure' => 'required',
             'arrival' => 'required'
         ]);
-        // TODO:
-        // $flight->create([
-        //     'origin_city_id' => input(),
-        //     'destination_city_id' => input(),
-        //     'company_id' => input(),
-        //     'departure' => input(),
-        //     'arrival' => input()
-        // ]);
+
+        $flight = Flight::crete([
+            'name' => $request->input(),
+            'origin_city_id' => $request->input(),
+            'destination_city_id' => $request->input(),
+            'company_id' => $request->input(),
+            'departure' => $request->input(),
+            'arrival' => $request->input()
+        ]);
+
+        return $flight;
     }
 }

@@ -4,24 +4,33 @@
         <form method = "POST" action="/manage/cities/" id="add-city-form">
             @csrf
     
-            <input type="text" placeholder="City Name" name="name">
+            <input type="text" placeholder="City Name" name="name" class="form-control">
     
-            <button type="submit" class="px-2 py-2 rounded bg-indigo-600">
+            <button type="submit" class="px-2 py-2 rounded bg-indigo-600 text-white hover:bg-indigo-700">
                 Register new City
             </button>
         </form>
     </section>
 
-    <div id="city-list">
+    <table>
+        <thead>
+            <tr>
+                <th>City ID</th>
+                <th>Company Name</th>
+            </tr>
+        </thead>
 
-        @foreach ($cities as $city)
-        <span>
-            {{ $city->name }} 
-            <br>
-        </span>
-        @endforeach
+        <tbody id="city-list">
+            @foreach ($cities as $city)
+            <tr>
+                <td>{{ $city->id }} </td>
+                <td>{{ $city->name }} </td>
+            </tr>
+            @endforeach
+        
+        </tbody>
+    </table>
 
-    </div>
 
     @push('scripts')
     <script>
@@ -36,12 +45,13 @@
                     success: function updateDiv(data)
                     { 
                         $('#city-list').prepend(
-                            `<span>
-                                ${data.name}
-                                <br>
-                            </span>`
+                            `<tr>
+                                <td>${data.id} </td>
+                                <td>${data.name} </td>
+                            </tr>`
                         );
                         $(form)[0].reset();
+                        
                     }
                 });
             });

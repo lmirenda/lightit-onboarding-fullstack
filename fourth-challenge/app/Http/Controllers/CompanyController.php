@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 
 class CompanyController extends Controller
 {
+    protected $guarded = ['id'];
+
     public function index()
     {
         $companies = Company::all()->sortBy('name');
@@ -14,15 +16,16 @@ class CompanyController extends Controller
         return view('companies', ['companies' => $companies]);
     }
 
-    public function store(Company $company, Request $request)
+    public function store(Request $request)
     {
         $request->validate([
             'name' => 'required|unique:companies'
         ]);
 
-        $company->create([
+        $company = Company::create([
             'name' => $request->input('name')
         ]);
-        return back();
+
+        return $company;
     }
 }
