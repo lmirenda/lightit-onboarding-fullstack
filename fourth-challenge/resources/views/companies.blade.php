@@ -1,45 +1,3 @@
-{{-- <x-layout>
-
-    <section>
-        <div method = "POST" action="/manage/companies" id="add-company-form">
-            @csrf
-    
-            <input type="text" placeholder="Company Name" name="name" id="company-name-input">
-    
-            <button id="button-add-company" onclick="process();" type="submit">
-                Register new Company
-            </button>
-        </div>
-    </section>
-
-    @foreach ($companies as $company)
-    {{ $company->name }}
-    <br>
-    @endforeach
-
-    @push('scripts')
-    <script>
-        document.querySelector("#button-add-company").addEventListener('click', process()); 
-        function process(){
-            let obj = {
-                name: document.querySelector('#company-name-input').value
-            };
-            const res = fetch('/manage/companies'), {
-            headers:{
-                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-                'Content-Type': 'application/json'
-            },
-            mehtod: 'POST',
-            body: JSON.stringify(obj)
-            });
-
-            const data = await res.json()
-            console.log(data)
-        }
-    </script>
-    @endpush
-</x-layout> --}}
-
 <x-layout>
     <div class="container p-4">
         <div class="card border-info">
@@ -53,8 +11,8 @@
             />
             <button 
                 onclick="addCompany()"
-                class ="btn btn-info"
-              >aceptar
+                class="px-2 py-2 rounded bg-indigo-600 text-white hover:bg-indigo-700"
+              >Register new Company
             </button>
            </div>
         </div>               
@@ -77,13 +35,10 @@
    </table>
   
 
-<!-- JavaScript-->
-
     <script>
         let name =  document.getElementById('name');
         
         async function addCompany(){
-            console.log('click')
         
             let obj = { name:name.value };
             const res = await fetch('/manage/companies/', {
@@ -97,24 +52,25 @@
             })
         
             let data = await res.json();
-            console.log(data.id)
-            await clearInput();
-            document.querySelector('#companies-list').appendChild(
+            clearInput();
+            createTableRule(data);
+        }
+
+        function createTableRule(data) {
+            let row = 
                 `
                     <tr>
                         <td>${data.id}</td>
                         <td>${data.name}</td>
                     </tr>
                 `
-            )
+
+            const table = document.getElementById('companies-list').innerHTML += row;
         }
-       
 
         function clearInput(){
             name.value = ""
         }
-
-       
 
     </script>
 </x-layout>

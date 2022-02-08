@@ -11,7 +11,7 @@ class CompanyController extends Controller
 
     public function index()
     {
-        $companies = Company::all()->sortBy('name');
+        $companies = Company::all()->sortBy('created_at');
 
         return view('companies', ['companies' => $companies]);
     }
