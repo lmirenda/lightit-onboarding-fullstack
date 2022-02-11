@@ -31,15 +31,15 @@
                         <hr class="my-3">
 
                         <label for="start">Departure:</label>
-                        <input type="date" id="start" name="trip-start"
-                            value="2022-03-01"
-                            min="2022-03-01" max="2022-12-31">
+                        <input type="datetime-local" id="start" name="trip-start"
+                            min="2022-03-01T00:00" :max="maxDepartureDate"
+                            @change='setDepature'>
                         <hr class="my-3">
         
                         <label for="start">Arrival:</label>
-                        <input type="date" id="end" name="trip-end"
-                            value="2022-03-02"
-                            min="2022-04-31" max="2022-12-31">
+                        <input type="datetime-local" id="end" name="trip-end"
+                            :min="minArrivalDate" max="2022-12-31T00:00"
+                            @change='setArrival'>
                         <hr class="my-3">
                         <button class="btn btn-primary max-w-sm bg-indigo-500 hover:bg-indigo-600" >Register new flight</button>
                     </div>
@@ -52,6 +52,10 @@
             Origin id: {{selectedOrigin}}
             <br>
             Destination id: {{selectedDestination}}
+            <br>
+            Dep date: {{selectedDeparture}}
+            <br>
+            Arr date: {{ selectedArrival }}
         </div>
     </div>
 </template>
@@ -89,6 +93,12 @@
             },
             setDestination(e) {
                 this.selectedDestination = e.target.value;
+            },
+            setDepature(e){
+                this.selectedDeparture = e.target.value
+            },
+            setArrival(e){
+                this.selectedArrival = e.target.value
             }
         },  
         computed: {
@@ -97,6 +107,12 @@
             },
             availableDestinations() {
                 return this.cities.filter( city => city.id != this.selectedOrigin)
+            },
+            minArrivalDate() {
+                return this.selectedDeparture ? this.selectedDeparture : '2022-03-01T00:00'
+            },
+            maxDepartureDate() {
+                return this.selectedArrival ? this.selectedArrival : '2022-12-30T00:00'
             }
         }
     }

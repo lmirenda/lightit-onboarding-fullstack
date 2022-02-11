@@ -22481,6 +22481,12 @@ __webpack_require__.r(__webpack_exports__);
     },
     setDestination: function setDestination(e) {
       this.selectedDestination = e.target.value;
+    },
+    setDepature: function setDepature(e) {
+      this.selectedDeparture = e.target.value;
+    },
+    setArrival: function setArrival(e) {
+      this.selectedArrival = e.target.value;
     }
   },
   computed: {
@@ -22497,6 +22503,12 @@ __webpack_require__.r(__webpack_exports__);
       return this.cities.filter(function (city) {
         return city.id != _this2.selectedOrigin;
       });
+    },
+    minArrivalDate: function minArrivalDate() {
+      return this.selectedDeparture ? this.selectedDeparture : '2022-03-01T00:00';
+    },
+    maxDepartureDate: function maxDepartureDate() {
+      return this.selectedArrival ? this.selectedArrival : '2022-12-30T00:00';
     }
   }
 });
@@ -22575,13 +22587,59 @@ var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 
 var _hoisted_14 = ["value"];
 
-var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<hr class=\"my-3\"><label for=\"start\">Departure:</label><input type=\"date\" id=\"start\" name=\"trip-start\" value=\"2022-03-01\" min=\"2022-03-01\" max=\"2022-12-31\"><hr class=\"my-3\"><label for=\"start\">Arrival:</label><input type=\"date\" id=\"end\" name=\"trip-end\" value=\"2022-03-02\" min=\"2022-04-31\" max=\"2022-12-31\"><hr class=\"my-3\"><button class=\"btn btn-primary max-w-sm bg-indigo-500 hover:bg-indigo-600\">Register new flight</button>", 8);
+var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("hr", {
+  "class": "my-3"
+}, null, -1
+/* HOISTED */
+);
+
+var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "start"
+}, "Departure:", -1
+/* HOISTED */
+);
+
+var _hoisted_17 = ["max"];
+
+var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("hr", {
+  "class": "my-3"
+}, null, -1
+/* HOISTED */
+);
+
+var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "start"
+}, "Arrival:", -1
+/* HOISTED */
+);
+
+var _hoisted_20 = ["min"];
+
+var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("hr", {
+  "class": "my-3"
+}, null, -1
+/* HOISTED */
+);
+
+var _hoisted_22 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  "class": "btn btn-primary max-w-sm bg-indigo-500 hover:bg-indigo-600"
+}, "Register new flight", -1
+/* HOISTED */
+);
 
 var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
 /* HOISTED */
 );
 
 var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
+/* HOISTED */
+);
+
+var _hoisted_25 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
+/* HOISTED */
+);
+
+var _hoisted_26 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
 /* HOISTED */
 );
 
@@ -22643,11 +22701,37 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* KEYED_FRAGMENT */
   ))], 544
   /* HYDRATE_EVENTS, NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.selectedDestination]]), _hoisted_15])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Company id: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.selectedCompany) + " ", 1
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.selectedDestination]]), _hoisted_15, _hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    type: "datetime-local",
+    id: "start",
+    name: "trip-start",
+    min: "2022-03-01T00:00",
+    max: $options.maxDepartureDate,
+    onChange: _cache[6] || (_cache[6] = function () {
+      return $options.setDepature && $options.setDepature.apply($options, arguments);
+    })
+  }, null, 40
+  /* PROPS, HYDRATE_EVENTS */
+  , _hoisted_17), _hoisted_18, _hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    type: "datetime-local",
+    id: "end",
+    name: "trip-end",
+    min: $options.minArrivalDate,
+    max: "2022-12-31T00:00",
+    onChange: _cache[7] || (_cache[7] = function () {
+      return $options.setArrival && $options.setArrival.apply($options, arguments);
+    })
+  }, null, 40
+  /* PROPS, HYDRATE_EVENTS */
+  , _hoisted_20), _hoisted_21, _hoisted_22])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Company id: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.selectedCompany) + " ", 1
   /* TEXT */
   ), _hoisted_23, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Origin id: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.selectedOrigin) + " ", 1
   /* TEXT */
-  ), _hoisted_24, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Destination id: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.selectedDestination), 1
+  ), _hoisted_24, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Destination id: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.selectedDestination) + " ", 1
+  /* TEXT */
+  ), _hoisted_25, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Dep date: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.selectedDeparture) + " ", 1
+  /* TEXT */
+  ), _hoisted_26, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Arr date: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.selectedArrival), 1
   /* TEXT */
   )])]);
 }
