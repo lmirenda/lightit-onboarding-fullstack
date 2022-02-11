@@ -8,6 +8,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <link rel="stylesheet" href="">
+  <script src="{{ mix('/js/app.js') }}"></script>
 
 </head>
   <body class="bg-gradient-to-r from-slate-50 to-white">
