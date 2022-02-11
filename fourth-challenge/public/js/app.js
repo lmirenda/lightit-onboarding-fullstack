@@ -22456,9 +22456,7 @@ __webpack_require__.r(__webpack_exports__);
 //import axios from 'axios'
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['companies', 'cities'],
-  mounted: function mounted() {
-    console.log(this.companies);
-  },
+  mounted: function mounted() {},
   // methods: {
   //     async getCompanies() {
   //         const response = await axios.get('/manage/companies/data')
@@ -22469,7 +22467,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       selectedCompany: null,
       selectedOrigin: null,
-      selctedDestiny: null,
+      selectedDestination: null,
       selectedDeparture: null,
       selectedArrival: null
     };
@@ -22481,11 +22479,26 @@ __webpack_require__.r(__webpack_exports__);
     setOrigin: function setOrigin(e) {
       this.selectedOrigin = e.target.value;
     },
-    setDestiny: function setDestiny(e) {
-      this.selectedDestiny = e.target.value;
+    setDestination: function setDestination(e) {
+      this.selectedDestination = e.target.value;
     }
   },
-  computed: {}
+  computed: {
+    availableOrigins: function availableOrigins() {
+      var _this = this;
+
+      return this.cities.filter(function (city) {
+        return city.id != _this.selectedDestination;
+      });
+    },
+    availableDestinations: function availableDestinations() {
+      var _this2 = this;
+
+      return this.cities.filter(function (city) {
+        return city.id != _this2.selectedOrigin;
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -22541,34 +22554,45 @@ var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 );
 
 var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-  "for": "companiesSelect"
+  "for": "originsSelect"
 }, "Origin city:", -1
 /* HOISTED */
 );
 
-var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("hr", {
+var _hoisted_11 = ["value"];
+
+var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("hr", {
   "class": "my-3"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-  "for": "companiesSelect"
+var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "destinationsSelect"
 }, "Destination city:", -1
 /* HOISTED */
 );
 
-var _hoisted_13 = {
-  id: "destinationsSelect"
-};
+var _hoisted_14 = ["value"];
 
-var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<hr class=\"my-3\"><label for=\"start\">Departure:</label><input type=\"date\" id=\"start\" name=\"trip-start\" value=\"2022-03-01\" min=\"2022-03-01\" max=\"2022-12-31\"><hr class=\"my-3\"><label for=\"start\">Arrival:</label><input type=\"date\" id=\"end\" name=\"trip-end\" value=\"2022-03-02\" min=\"2022-04-31\" max=\"2022-12-31\"><hr class=\"my-3\"><button class=\"btn btn-primary max-w-sm bg-indigo-500 hover:bg-indigo-600\">Register new flight</button>", 8);
+var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<hr class=\"my-3\"><label for=\"start\">Departure:</label><input type=\"date\" id=\"start\" name=\"trip-start\" value=\"2022-03-01\" min=\"2022-03-01\" max=\"2022-12-31\"><hr class=\"my-3\"><label for=\"start\">Arrival:</label><input type=\"date\" id=\"end\" name=\"trip-end\" value=\"2022-03-02\" min=\"2022-04-31\" max=\"2022-12-31\"><hr class=\"my-3\"><button class=\"btn btn-primary max-w-sm bg-indigo-500 hover:bg-indigo-600\">Register new flight</button>", 8);
+
+var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
+/* HOISTED */
+);
+
+var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
+/* HOISTED */
+);
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [_hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [_hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [_hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [_hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
     id: "companiesSelect",
     onChange: _cache[0] || (_cache[0] = function () {
       return $options.setCompany && $options.setCompany.apply($options, arguments);
+    }),
+    "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
+      return $data.selectedCompany = $event;
     })
   }, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.companies, function (company) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("option", {
@@ -22579,36 +22603,53 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     , _hoisted_8);
   }), 128
   /* KEYED_FRAGMENT */
-  ))], 32
-  /* HYDRATE_EVENTS */
-  ), _hoisted_9, _hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+  ))], 544
+  /* HYDRATE_EVENTS, NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.selectedCompany]]), _hoisted_9, _hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
     id: "originsSelect",
-    "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
-      return _ctx.foo = $event;
+    "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
+      return $data.selectedOrigin = $event;
+    }),
+    onChange: _cache[3] || (_cache[3] = function () {
+      return $options.setOrigin && $options.setOrigin.apply($options, arguments);
     })
-  }, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.cities, function (city) {
+  }, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($options.availableOrigins, function (city) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("option", {
-      value: "{{city.id}}",
+      value: city.id,
       key: city.id
-    }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(city.name), 1
-    /* TEXT */
-    );
+    }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(city.name), 9
+    /* TEXT, PROPS */
+    , _hoisted_11);
   }), 128
   /* KEYED_FRAGMENT */
-  ))], 512
-  /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, _ctx.foo]]), _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" \n                        TODO:\n                        Make destination city select not include selected origin city "), _hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", _hoisted_13, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.cities, function (city) {
+  ))], 544
+  /* HYDRATE_EVENTS, NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.selectedOrigin]]), _hoisted_12, _hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+    id: "destinationsSelect",
+    "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
+      return $data.selectedDestination = $event;
+    }),
+    onChange: _cache[5] || (_cache[5] = function () {
+      return $options.setDestination && $options.setDestination.apply($options, arguments);
+    })
+  }, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($options.availableDestinations, function (city) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("option", {
-      value: "{{city.id}}",
+      value: city.id,
       key: city.id
-    }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(city.name), 1
-    /* TEXT */
-    );
+    }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(city.name), 9
+    /* TEXT, PROPS */
+    , _hoisted_14);
   }), 128
   /* KEYED_FRAGMENT */
-  ))]), _hoisted_14])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.selectedCompany), 1
+  ))], 544
+  /* HYDRATE_EVENTS, NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.selectedDestination]]), _hoisted_15])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Company id: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.selectedCompany) + " ", 1
   /* TEXT */
-  )]);
+  ), _hoisted_23, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Origin id: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.selectedOrigin) + " ", 1
+  /* TEXT */
+  ), _hoisted_24, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Destination id: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.selectedDestination), 1
+  /* TEXT */
+  )])]);
 }
 
 /***/ }),
