@@ -41,7 +41,10 @@
                             :min="minArrivalDate" max="2022-12-31T00:00"
                             @change='setArrival'>
                         <hr class="my-3">
-                        <button class="btn btn-primary max-w-sm bg-indigo-500 hover:bg-indigo-600" >Register new flight</button>
+                        <button 
+                            class="btn btn-primary max-w-sm bg-indigo-500 hover:bg-indigo-600" 
+                            :disabled="buttonStatus">
+                            Register new flight</button>
                     </div>
                 </div>
             </div>
@@ -113,6 +116,11 @@
             },
             maxDepartureDate() {
                 return this.selectedArrival ? this.selectedArrival : '2022-12-30T00:00'
+            },
+            buttonStatus() {
+                return this.selectedCompany && this.selectedOrigin && this.selectedDestination && this.selectedDeparture && this.selectedArrival
+                    ? false
+                    : true
             }
         }
     }

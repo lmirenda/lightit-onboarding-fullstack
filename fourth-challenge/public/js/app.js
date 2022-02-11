@@ -22509,6 +22509,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     maxDepartureDate: function maxDepartureDate() {
       return this.selectedArrival ? this.selectedArrival : '2022-12-30T00:00';
+    },
+    buttonStatus: function buttonStatus() {
+      return this.selectedCompany && this.selectedOrigin && this.selectedDestination && this.selectedDeparture && this.selectedArrival ? false : true;
     }
   }
 });
@@ -22621,11 +22624,7 @@ var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
-var _hoisted_22 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-  "class": "btn btn-primary max-w-sm bg-indigo-500 hover:bg-indigo-600"
-}, "Register new flight", -1
-/* HOISTED */
-);
+var _hoisted_22 = ["disabled"];
 
 var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
 /* HOISTED */
@@ -22723,7 +22722,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     })
   }, null, 40
   /* PROPS, HYDRATE_EVENTS */
-  , _hoisted_20), _hoisted_21, _hoisted_22])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Company id: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.selectedCompany) + " ", 1
+  , _hoisted_20), _hoisted_21, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    "class": "btn btn-primary max-w-sm bg-indigo-500 hover:bg-indigo-600",
+    disabled: $options.buttonStatus
+  }, " Register new flight", 8
+  /* PROPS */
+  , _hoisted_22)])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Company id: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.selectedCompany) + " ", 1
   /* TEXT */
   ), _hoisted_23, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Origin id: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.selectedOrigin) + " ", 1
   /* TEXT */
