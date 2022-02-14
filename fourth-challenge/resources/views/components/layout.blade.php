@@ -9,6 +9,8 @@
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <link rel="stylesheet" href="">
   <script src="{{ mix('/js/app.js') }}"></script>
+  <link rel="stylesheet" href="https://unpkg.com/vue-multiselect@2.1.0/dist/vue-multiselect.min.css">
+
 
 </head>
   <body class="bg-gradient-to-r from-slate-50 to-white">
