@@ -11,53 +11,42 @@
                         class="card-body space-around row justify-content-center"
                     >
                         <label for="companiesSelect">Airline Company:</label>
-                        <select
-                            id="companiesSelect"
-                            @change="setCompany"
-                            v-model="selectedCompany"
-                        >
-                            <option
-                                v-for="company in companies"
-                                :key="company.id"
-                                :value="company.id"
+                        <div>
+                            <VueMultiselect
+                                v-model="selectedCompany"
+                                :options="companies"
+                                track-by="id"
+                                label="name"
+                                value="id"
                             >
-                                {{ company.name }}
-                            </option>
-                        </select>
+                            </VueMultiselect>
+                        </div>
                         <hr class="my-3" />
 
                         <label for="originsSelect">Origin city:</label>
-                        <select
-                            id="originsSelect"
-                            v-model="selectedOrigin"
-                            @change="setOrigin"
-                        >
-                            <option
-                                v-for="city in availableOrigins"
-                                :value="city.id"
-                                :key="city.id"
+                        <div>
+                            <VueMultiselect
+                                v-model="selectedOrigin"
+                                :options="availableOrigins"
+                                track-by="id"
+                                label="name"
+                                value="id"
                             >
-                                {{ city.name }}
-                            </option>
-                        </select>
+                            </VueMultiselect>
+                        </div>
                         <hr class="my-3" />
 
                         <label for="destinationsSelect"
                             >Destination city:</label
                         >
-                        <select
-                            id="destinationsSelect"
+                        <VueMultiselect
                             v-model="selectedDestination"
-                            @change="setDestination"
+                            :options="availableDestinations"
+                            track-by="id"
+                            label="name"
+                            value="id"
                         >
-                            <option
-                                v-for="city in availableDestinations"
-                                :value="city.id"
-                                :key="city.id"
-                            >
-                                {{ city.name }}
-                            </option>
-                        </select>
+                        </VueMultiselect>
                         <hr class="my-3" />
 
                         <label for="start">Departure:</label>
@@ -139,6 +128,7 @@
 
 <script>
 import axios from "axios";
+import VueMultiselect from "vue-multiselect";
 
 export default {
     props: ["companies", "cities"],
@@ -154,19 +144,11 @@ export default {
             selectedArrival: null,
             savingSuccessful: false,
             savingFailed: false,
+            selected: null,
         };
     },
 
     methods: {
-        setCompany(e) {
-            this.selectedCompany = parseInt(e.target.value);
-        },
-        setOrigin(e) {
-            this.selectedOrigin = parseInt(e.target.value);
-        },
-        setDestination(e) {
-            this.selectedDestination = parseInt(e.target.value);
-        },
         setDepature(e) {
             this.selectedDeparture = e.target.value;
         },
@@ -178,9 +160,9 @@ export default {
                 const response = await axios.post(
                     "/manage/flights/",
                     {
-                        origin_city_id: this.selectedOrigin,
-                        destination_city_id: this.selectedDestination,
-                        company_id: this.selectedCompany,
+                        origin_city_id: this.selectedOrigin.id,
+                        destination_city_id: this.selectedDestination.id,
+                        company_id: this.selectedCompany.id,
                         departure: this.selectedDeparture,
                         arrival: this.selectedArrival,
                     },
@@ -192,8 +174,7 @@ export default {
                         },
                     }
                 );
-                console.log(response.status);
-                if (response.status >= 201 && response.status < 300) {
+                if (response.status >= 200 && response.status < 300) {
                     this.savingSuccessful = true;
                 }
             } catch (err) {
@@ -210,12 +191,18 @@ export default {
 
     computed: {
         availableOrigins() {
-            return this.cities.filter(
-                (city) => city.id != this.selectedDestination
-            );
+            return this.selectedDestination
+                ? this.cities.filter(
+                      (city) => city.id != this.selectedDestination.id
+                  )
+                : this.cities;
         },
         availableDestinations() {
-            return this.cities.filter((city) => city.id != this.selectedOrigin);
+            return this.selectedOrigin
+                ? this.cities.filter(
+                      (city) => city.id != this.selectedOrigin.id
+                  )
+                : this.cities;
         },
         minArrivalDate() {
             return this.selectedDeparture
@@ -237,5 +224,6 @@ export default {
                 : true;
         },
     },
+    components: { VueMultiselect },
 };
 </script>
