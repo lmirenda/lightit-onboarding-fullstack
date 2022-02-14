@@ -5,6 +5,7 @@
  */
 
 import { createApp } from 'vue';
+
 require('./bootstrap');
 
 
@@ -21,5 +22,6 @@ window.Vue = require('vue').default;
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 const app = createApp({})
-app.component('example-component', require('./components/ExampleComponent.vue').default);
+app.component('flight-panel', require('./components/FlightPanel.vue').default);
+app.component('panel', require('./components/Panel.vue').default);
 app.mount("#app");
