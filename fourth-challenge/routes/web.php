@@ -21,6 +21,6 @@ Route::post('/manage/cities', [CityController::class, 'store']);
 
 Route::post('/manage/companies', [CompanyController::class, 'store']);
 
-Route::post('/manage/flights/create', [FlightController::class, 'store']);
+Route::post('/manage/flights/', [FlightController::class, 'store']);
 
 Route::get('/manage/companies/data', [FlightController::class, 'test']);

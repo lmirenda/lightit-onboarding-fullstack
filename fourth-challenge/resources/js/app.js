@@ -20,6 +20,6 @@ window.Vue = require('vue').default;
 
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
-let app = createApp({})
+const app = createApp({})
 app.component('example-component', require('./components/ExampleComponent.vue').default);
-app.mount("#app") 
+app.mount("#app");

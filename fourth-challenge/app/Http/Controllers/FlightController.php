@@ -29,12 +29,12 @@ class FlightController extends Controller
         ]);
 
         $flight = Flight::create([
-            'name' => $request->input(),
-            'origin_city_id' => $request->input(),
-            'destination_city_id' => $request->input(),
-            'company_id' => $request->input(),
-            'departure' => $request->input(),
-            'arrival' => $request->input()
+            'name' => 'test',
+            'origin_city_id' => $request->input('origin_city_id'),
+            'destination_city_id' => $request->input('destination_city_id'),
+            'company_id' => $request->input('company_id'),
+            'departure' => $request->input('departure'),
+            'arrival' => $request->input('arrival')
         ]);
 
         return $flight;
