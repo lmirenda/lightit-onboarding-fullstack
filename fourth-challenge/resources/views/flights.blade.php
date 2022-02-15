@@ -48,8 +48,13 @@
                                 </td>                      
                             </tr>
                         @endforeach
-                    </tbody>
-                  </table>
+                      </tbody>
+                    </table>
+                    <div class="mx-2 my-2">
+
+                      {{ $flights->links() }}
+
+                    </div>
                 </div>
               </div>
             </div>

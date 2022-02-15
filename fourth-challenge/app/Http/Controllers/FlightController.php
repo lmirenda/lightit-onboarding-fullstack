@@ -11,10 +11,8 @@ class FlightController extends Controller
 {
     public function index()
     {
-        $flights = Flight::all()->sortBy('departure');
-
         return view('flights', [
-            'flights' => $flights,
+            'flights' => Flight::orderBy('departure')->paginate(10),
             'companies' => Company::all(),
             'cities' => City::all()
         ]);
