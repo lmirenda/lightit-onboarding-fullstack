@@ -22527,6 +22527,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 if (response.status >= 200 && response.status < 300) {
                   _this.savingSuccessful = true;
+
+                  _this.clearInputs();
                 }
 
                 _context.next = 10;
@@ -22550,6 +22552,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     closePopupFailed: function closePopupFailed() {
       this.savingFailed = false;
+    },
+    clearInputs: function clearInputs() {
+      this.selectedCompany = null;
+      this.selectedOrigin = null;
+      this.selectedDestination = null;
+      this.selectedDeparture = null;
+      this.selectedArrival = null;
     }
   },
   computed: {
@@ -22657,12 +22666,12 @@ var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 );
 
 var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-  "for": "start"
+  "for": "departureCalendar"
 }, "Departure:", -1
 /* HOISTED */
 );
 
-var _hoisted_14 = ["max"];
+var _hoisted_14 = ["max", "value"];
 
 var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("hr", {
   "class": "my-3"
@@ -22671,12 +22680,12 @@ var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 );
 
 var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-  "for": "start"
+  "for": "arrivalCalendar"
 }, "Arrival:", -1
 /* HOISTED */
 );
 
-var _hoisted_17 = ["min"];
+var _hoisted_17 = ["min", "value"];
 
 var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("hr", {
   "class": "my-3"
@@ -22764,7 +22773,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     value: "id"
   }, null, 8
   /* PROPS */
-  , ["modelValue", "options"])]), _hoisted_10, _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_VueMultiselect, {
+  , ["modelValue", "options"])]), _hoisted_10, _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_VueMultiselect, {
     modelValue: $data.selectedDestination,
     "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
       return $data.selectedDestination = $event;
@@ -22775,26 +22784,28 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     value: "id"
   }, null, 8
   /* PROPS */
-  , ["modelValue", "options"]), _hoisted_12, _hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  , ["modelValue", "options"])]), _hoisted_12, _hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "datetime-local",
-    id: "start",
+    id: "departureCalendar",
     name: "trip-start",
     min: "2022-03-01T00:00",
     max: $options.maxDepartureDate,
     onChange: _cache[3] || (_cache[3] = function () {
       return $options.setDepature && $options.setDepature.apply($options, arguments);
-    })
+    }),
+    value: $data.selectedDeparture
   }, null, 40
   /* PROPS, HYDRATE_EVENTS */
   , _hoisted_14), _hoisted_15, _hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "datetime-local",
-    id: "end",
+    id: "arrivalCalendar",
     name: "trip-end",
     min: $options.minArrivalDate,
     max: "2022-12-31T00:00",
     onChange: _cache[4] || (_cache[4] = function () {
       return $options.setArrival && $options.setArrival.apply($options, arguments);
-    })
+    }),
+    value: $data.selectedArrival
   }, null, 40
   /* PROPS, HYDRATE_EVENTS */
   , _hoisted_17), _hoisted_18, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {

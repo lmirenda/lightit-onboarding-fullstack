@@ -39,35 +39,39 @@
                         <label for="destinationsSelect"
                             >Destination city:</label
                         >
-                        <VueMultiselect
-                            v-model="selectedDestination"
-                            :options="availableDestinations"
-                            track-by="id"
-                            label="name"
-                            value="id"
-                        >
-                        </VueMultiselect>
+                        <div>
+                            <VueMultiselect
+                                v-model="selectedDestination"
+                                :options="availableDestinations"
+                                track-by="id"
+                                label="name"
+                                value="id"
+                            >
+                            </VueMultiselect>
+                        </div>
                         <hr class="my-3" />
 
-                        <label for="start">Departure:</label>
+                        <label for="departureCalendar">Departure:</label>
                         <input
                             type="datetime-local"
-                            id="start"
+                            id="departureCalendar"
                             name="trip-start"
                             min="2022-03-01T00:00"
                             :max="maxDepartureDate"
                             @change="setDepature"
+                            :value="selectedDeparture"
                         />
                         <hr class="my-3" />
 
-                        <label for="start">Arrival:</label>
+                        <label for="arrivalCalendar">Arrival:</label>
                         <input
                             type="datetime-local"
-                            id="end"
+                            id="arrivalCalendar"
                             name="trip-end"
                             :min="minArrivalDate"
                             max="2022-12-31T00:00"
                             @change="setArrival"
+                            :value="selectedArrival"
                         />
                         <hr class="my-3" />
                         <button
@@ -176,6 +180,7 @@ export default {
                 );
                 if (response.status >= 200 && response.status < 300) {
                     this.savingSuccessful = true;
+                    this.clearInputs();
                 }
             } catch (err) {
                 this.savingFailed = true;
@@ -186,6 +191,13 @@ export default {
         },
         closePopupFailed() {
             this.savingFailed = false;
+        },
+        clearInputs() {
+            this.selectedCompany = null;
+            this.selectedOrigin = null;
+            this.selectedDestination = null;
+            this.selectedDeparture = null;
+            this.selectedArrival = null;
         },
     },
 
