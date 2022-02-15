@@ -148,7 +148,6 @@ export default {
             selectedArrival: null,
             savingSuccessful: false,
             savingFailed: false,
-            selected: null,
         };
     },
 
@@ -161,23 +160,13 @@ export default {
         },
         async storeFlight() {
             try {
-                const response = await axios.post(
-                    "/manage/flights/",
-                    {
-                        origin_city_id: this.selectedOrigin.id,
-                        destination_city_id: this.selectedDestination.id,
-                        company_id: this.selectedCompany.id,
-                        departure: this.selectedDeparture,
-                        arrival: this.selectedArrival,
-                    },
-                    {
-                        headers: {
-                            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
-                                "content"
-                            ),
-                        },
-                    }
-                );
+                const response = await axios.post("/manage/flights/", {
+                    origin_city_id: this.selectedOrigin.id,
+                    destination_city_id: this.selectedDestination.id,
+                    company_id: this.selectedCompany.id,
+                    departure: this.selectedDeparture,
+                    arrival: this.selectedArrival,
+                });
                 if (response.status >= 200 && response.status < 300) {
                     this.savingSuccessful = true;
                     this.clearInputs();

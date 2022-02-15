@@ -14,7 +14,9 @@ class FlightController extends Controller
         $flights = Flight::all()->sortBy('departure');
 
         return view('flights', [
-            'flights' => $flights
+            'flights' => $flights,
+            'companies' => Company::all(),
+            'cities' => City::all()
         ]);
     }
 
@@ -40,17 +42,12 @@ class FlightController extends Controller
         return $flight;
     }
 
-    public function create()
+    public function show()
     {
         return view('manageFlights', [
             'flights' => Flight::all(),
             'companies' => Company::all(),
             'cities' => City::all()
         ]);
-    }
-
-    public function test()
-    {
-        return Company::all();
     }
 }

@@ -13,7 +13,7 @@ Route::get('/manage/cities', [CityController::class, 'index']);
 
 Route::get('/manage/companies', [CompanyController::class, 'index']);
 
-Route::get('/manage/flights', [FlightController::class, 'create']);
+Route::get('/manage/flights', [FlightController::class, 'show']);
 
 Route::get('/list/flights', [FlightController::class, 'index']);
 
@@ -22,5 +22,3 @@ Route::post('/manage/cities', [CityController::class, 'store']);
 Route::post('/manage/companies', [CompanyController::class, 'store']);
 
 Route::post('/manage/flights/', [FlightController::class, 'store']);
-
-Route::get('/manage/companies/data', [FlightController::class, 'test']);
