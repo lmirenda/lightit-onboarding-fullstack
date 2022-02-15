@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\City;
 use App\Models\Flight;
+use App\Models\Company;
 use Illuminate\Http\Request;
 
 class FlightController extends Controller
@@ -11,7 +13,11 @@ class FlightController extends Controller
     {
         $flights = Flight::all()->sortBy('departure');
 
-        return view('flights', ['flights' => $flights]);
+        return view('flights', [
+            'flights' => $flights,
+            'companies' => Company::all(),
+            'cities' => City::all()
+        ]);
     }
 
     public function store(Request $request)
@@ -24,15 +30,24 @@ class FlightController extends Controller
             'arrival' => 'required'
         ]);
 
-        $flight = Flight::crete([
-            'name' => $request->input(),
-            'origin_city_id' => $request->input(),
-            'destination_city_id' => $request->input(),
-            'company_id' => $request->input(),
-            'departure' => $request->input(),
-            'arrival' => $request->input()
+        $flight = Flight::create([
+            'name' => 'test',
+            'origin_city_id' => $request->input('origin_city_id'),
+            'destination_city_id' => $request->input('destination_city_id'),
+            'company_id' => $request->input('company_id'),
+            'departure' => $request->input('departure'),
+            'arrival' => $request->input('arrival')
         ]);
 
         return $flight;
+    }
+
+    public function show()
+    {
+        return view('manageFlights', [
+            'flights' => Flight::all(),
+            'companies' => Company::all(),
+            'cities' => City::all()
+        ]);
     }
 }
