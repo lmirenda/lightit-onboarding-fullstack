@@ -48,4 +48,13 @@ class FlightController extends Controller
             'cities' => City::all()
         ]);
     }
+
+    public function destroy(Request $request)
+    {
+        $request->validate([
+            'id' => 'required'
+        ]);
+
+        Flight::find($request->input('id'))->delete();
+    }
 }

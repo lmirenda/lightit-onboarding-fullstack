@@ -11856,6 +11856,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .h-14 {
   height: 3.5rem;
 }
+.h-screen {
+  height: 100vh;
+}
 .w-6 {
   width: 1.5rem;
 }

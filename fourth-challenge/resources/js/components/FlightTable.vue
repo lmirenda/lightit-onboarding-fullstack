@@ -1,54 +1,56 @@
 <template>
     <div>
-        <thead>
-            <tr>
-                <th>Flight ID</th>
-                <th>Company</th>
-                <th>Origin City</th>
-                <th>Destination City</th>
-                <th>Departure</th>
-                <th>Arrival</th>
-                <th>Administrate</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr v-for="flight in flightBatch" :key="flight.id">
-                <td>
-                    {{ flight.id }}
-                </td>
-                <td>
-                    {{ flight.company.name }}
-                </td>
-                <td>
-                    {{ flight.origin.name }}
-                </td>
-                <td>
-                    {{ flight.destination.name }}
-                </td>
-                <td>
-                    {{ flight.departure }}
-                </td>
-                <td>
-                    {{ flight.arrival }}
-                </td>
-                <td>
-                    <button
-                        class="btn bg-sky-400 mx-1 my-1 text-white hover:bg-sky-600"
-                    >
-                        Edit
-                    </button>
-                    <button
-                        class="btn bg-rose-500 mx-1 my-1 text-white hover:bg-rose-700"
-                        @click="
-                            showDeletePanel = true;
-                            selectedFlight = flight;
-                        "
-                    >
-                        Delete
-                    </button>
-                </td>
-            </tr>
-        </tbody>
+        <table>
+            <thead>
+                <tr>
+                    <th>Flight ID</th>
+                    <th>Company</th>
+                    <th>Origin City</th>
+                    <th>Destination City</th>
+                    <th>Departure</th>
+                    <th>Arrival</th>
+                    <th>Administrate</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="flight in flightBatch" :key="flight.id">
+                    <td>
+                        {{ flight.id }}
+                    </td>
+                    <td>
+                        {{ flight.company.name }}
+                    </td>
+                    <td>
+                        {{ flight.origin.name }}
+                    </td>
+                    <td>
+                        {{ flight.destination.name }}
+                    </td>
+                    <td>
+                        {{ flight.departure }}
+                    </td>
+                    <td>
+                        {{ flight.arrival }}
+                    </td>
+                    <td>
+                        <button
+                            class="btn bg-sky-400 mx-1 my-1 text-white hover:bg-sky-600"
+                        >
+                            Edit
+                        </button>
+                        <button
+                            class="btn bg-rose-500 mx-1 my-1 text-white hover:bg-rose-700"
+                            @click="
+                                showDeletePanel = true;
+                                selectedFlight = flight;
+                            "
+                        >
+                            Delete
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
         <pagination
             v-model="page"
             :records="flightRecords"
@@ -71,7 +73,7 @@ export default {
         return {
             page: 1,
             recordsPerPage: 10,
-            selectedFlight: this.flights[0],
+            selectedFlight: null,
             showDeletePanel: false,
         };
     },
@@ -81,7 +83,7 @@ export default {
         },
         flightBatch() {
             let flightArr = Object.values(this.flights);
-            let firstPos = 0 + (this.page - 1) * 10;
+            let firstPos = (this.page - 1) * 10;
             let lastPos = firstPos + this.recordsPerPage;
             return flightArr.slice(firstPos, lastPos);
         },

@@ -1,6 +1,6 @@
 <template>
     <div
-        class="overflow-y-auto overflow-x-hidden fixed right-0 left-0 top-4 z-50 justify-center items-center md:inset-0 h-modal sm:h-full"
+        class="overflow-y-auto overflow-x-hidden fixed right-0 left-0 top-4 z-50 justify-center items-center md:inset-0 h-modal sm:h-full flex h-screen"
         id="popup-modal"
         aria-hidden="true"
     >
@@ -71,14 +71,21 @@
     </div>
 </template>
 <script>
+import axios from "Axios";
 export default {
     props: ["flight"],
     mounted() {
         console.log("Delete mounted");
     },
     methods: {
-        deleteFlight() {
-            console.log(this.flight);
+        async deleteFlight() {
+            const res = await axios.delete("/manage/flights/", {
+                data: { id: this.flight.id },
+            });
+            if (res.status === 200) {
+                console.log("success");
+                this.closePanel();
+            }
         },
         closePanel() {
             this.$emit("closed");
