@@ -12,7 +12,7 @@ class FlightController extends Controller
     public function index()
     {
         return view('flights', [
-            'flights' => Flight::orderBy('departure')->paginate(10),
+            'flights' => Flight::all()->sortBy('departure'),
             'companies' => Company::all(),
             'cities' => City::all()
         ]);

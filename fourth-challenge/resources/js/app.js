@@ -5,6 +5,8 @@
  */
 
 import { createApp } from 'vue';
+import Pagination from 'v-pagination-3';
+
 
 require('./bootstrap');
 
@@ -23,3 +25,8 @@ window.Vue = require('vue').default;
 const app = createApp({})
 app.component('flight-panel', require('./components/FlightPanel.vue').default);
 app.mount("#app");
+
+const app2 = createApp({})
+app2.component('flight-table', require('./components/FlightTable.vue').default);
+app2.component('pagination', Pagination);
+app2.mount('#app2');
