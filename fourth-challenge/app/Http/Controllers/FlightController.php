@@ -49,12 +49,9 @@ class FlightController extends Controller
         ]);
     }
 
-    public function destroy(Request $request)
+    public function destroy($id)
     {
-        $request->validate([
-            'id' => 'required'
-        ]);
 
-        Flight::find($request->input('id'))->delete();
+        Flight::find($id)->delete();
     }
 }

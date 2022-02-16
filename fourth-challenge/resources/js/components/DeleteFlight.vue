@@ -74,14 +74,10 @@
 import axios from "Axios";
 export default {
     props: ["flight"],
-    mounted() {
-        console.log("Delete mounted");
-    },
+
     methods: {
         async deleteFlight() {
-            const res = await axios.delete("/manage/flights/", {
-                data: { id: this.flight.id },
-            });
+            const res = await axios.delete("/manage/flights/" + this.flight.id);
             if (res.status === 200) {
                 console.log("success");
                 this.closePanel();

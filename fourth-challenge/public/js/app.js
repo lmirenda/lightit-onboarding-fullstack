@@ -24530,9 +24530,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ["flight"],
-  mounted: function mounted() {
-    console.log("Delete mounted");
-  },
   methods: {
     deleteFlight: function deleteFlight() {
       var _this = this;
@@ -24544,11 +24541,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return Axios__WEBPACK_IMPORTED_MODULE_1___default()["delete"]("/manage/flights/", {
-                  data: {
-                    id: _this.flight.id
-                  }
-                });
+                return Axios__WEBPACK_IMPORTED_MODULE_1___default()["delete"]("/manage/flights/" + _this.flight.id);
 
               case 2:
                 res = _context.sent;
