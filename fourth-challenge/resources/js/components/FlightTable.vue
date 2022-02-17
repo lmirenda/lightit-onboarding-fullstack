@@ -35,6 +35,10 @@
                     <td>
                         <button
                             class="btn bg-sky-400 mx-1 my-1 text-white hover:bg-sky-600"
+                            @click="
+                                showEditPanel = true;
+                                selectedFlight = flight;
+                            "
                         >
                             Edit
                         </button>
@@ -62,11 +66,18 @@
         :flight="selectedFlight"
         @closed="closeDeletePanel"
     />
+    <flight-edit
+        v-if="showEditPanel"
+        :flight="selectedFlight"
+        :companies="companies"
+        :cities="cities"
+        @closed="closeEditPanel"
+    />
 </template>
 
 <script>
 export default {
-    props: ["flights"],
+    props: ["flights", "companies", "cities"],
     mounted() {},
 
     data() {
@@ -75,6 +86,7 @@ export default {
             recordsPerPage: 10,
             selectedFlight: null,
             showDeletePanel: false,
+            showEditPanel: false,
         };
     },
     computed: {
@@ -99,6 +111,10 @@ export default {
         closeDeletePanel() {
             this.selectedFlight = null;
             this.showDeletePanel = false;
+        },
+        closeEditPanel() {
+            this.selectedFlight = null;
+            this.showEditPanel = false;
         },
     },
     components: {},

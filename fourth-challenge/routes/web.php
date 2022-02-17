@@ -24,3 +24,5 @@ Route::post('/manage/companies', [CompanyController::class, 'store']);
 Route::post('/manage/flights/', [FlightController::class, 'store']);
 
 Route::delete('/manage/flights/{flight}', [FlightController::class, 'destroy']);
+
+Route::put('/manage/flights/{flight}', [FlightController::class, 'update']);

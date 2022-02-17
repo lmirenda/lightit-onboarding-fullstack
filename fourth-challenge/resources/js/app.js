@@ -29,5 +29,6 @@ app.mount("#app");
 const app2 = createApp({})
 app2.component('flight-table', require('./components/FlightTable.vue').default);
 app2.component('flight-delete', require('./components/DeleteFlight.vue').default);
+app2.component('flight-edit', require('./components/EditFlight.vue').default);
 app2.component('pagination', Pagination);
 app2.mount('#app2');

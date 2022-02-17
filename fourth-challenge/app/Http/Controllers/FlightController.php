@@ -49,9 +49,13 @@ class FlightController extends Controller
         ]);
     }
 
-    public function destroy($id)
+    public function destroy(Flight $flight)
     {
+        $flight->delete();
+    }
 
-        Flight::find($id)->delete();
+    public function update(Flight $flight, Request $request)
+    {
+        $flight->update($request->all());
     }
 }

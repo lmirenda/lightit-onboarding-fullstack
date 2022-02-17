@@ -71,7 +71,7 @@
     </div>
 </template>
 <script>
-import axios from "Axios";
+import axios from "axios";
 export default {
     props: ["flight"],
 
@@ -79,7 +79,6 @@ export default {
         async deleteFlight() {
             const res = await axios.delete("/manage/flights/" + this.flight.id);
             if (res.status === 200) {
-                console.log("success");
                 this.closePanel();
             }
         },
