@@ -12,7 +12,7 @@ class FlightController extends Controller
     public function index()
     {
         return view('flights', [
-            'flights' => Flight::orderBy('departure')->paginate(10),
+            'flights' => Flight::all()->sortBy('departure'),
             'companies' => Company::all(),
             'cities' => City::all()
         ]);
@@ -47,5 +47,26 @@ class FlightController extends Controller
             'companies' => Company::all(),
             'cities' => City::all()
         ]);
+    }
+
+    public function destroy(Flight $flight)
+    {
+        $flight->delete();
+
+        return response()->json();
+    }
+
+    public function update(Flight $flight, Request $request)
+    {
+        $request->validate([
+            'origin_city_id' => 'required',
+            'destination_city_id' => 'required',
+            'company_id' => 'required',
+            'departure' => 'required',
+            'arrival' => 'required'
+        ]);
+        $flight->update($request->all());
+
+        return $flight;
     }
 }
