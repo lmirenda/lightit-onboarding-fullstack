@@ -88,19 +88,27 @@
                             </VueMultiselect>
                         </div>
                     </div>
-                    <label for="departureCalendar">Departure:</label>
+                    <label
+                        for="departureCalendar"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                        >Departure:</label
+                    >
                     <input
                         type="datetime-local"
                         id="departureCalendar"
                         name="trip-start"
-                        min="2022-03-01T00:00"
+                        min="2020-03-01T00:00"
                         :max="maxDepartureDate"
                         @change="setDepature"
                         :value="selectedDeparture"
                     />
                     <hr class="my-3" />
 
-                    <label for="arrivalCalendar">Arrival:</label>
+                    <label
+                        for="arrivalCalendar"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                        >Arrival:</label
+                    >
                     <input
                         type="datetime-local"
                         id="arrivalCalendar"
@@ -110,6 +118,7 @@
                         @change="setArrival"
                         :value="selectedArrival"
                     />
+                    <hr />
 
                     <button
                         class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
@@ -119,7 +128,7 @@
                     </button>
                     <button
                         class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                        @click="logTime"
+                        @click="closePanel"
                     >
                         Discard changes
                     </button>
@@ -191,7 +200,12 @@ export default {
                 departure: this.selectedDeparture,
                 arrival: this.selectedArrival,
             });
-            console.log(res.status);
+            if (res.status == 200) {
+                this.closePanel();
+                this.editFailed = false;
+            } else {
+                this.editFailed = true;
+            }
         },
     },
     components: { VueMultiselect },

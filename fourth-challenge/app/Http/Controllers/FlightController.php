@@ -52,6 +52,8 @@ class FlightController extends Controller
     public function destroy(Flight $flight)
     {
         $flight->delete();
+
+        return response()->json();
     }
 
     public function update(Flight $flight, Request $request)
@@ -64,5 +66,7 @@ class FlightController extends Controller
             'arrival' => 'required'
         ]);
         $flight->update($request->all());
+
+        return $flight;
     }
 }
