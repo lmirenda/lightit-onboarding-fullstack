@@ -22592,12 +22592,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_1___default().put("/manage/flights/" + _this3.flight.id);
+                return axios__WEBPACK_IMPORTED_MODULE_1___default().put("/manage/flights/" + _this3.flight.id, {
+                  origin_city_id: _this3.selectedOrigin.id,
+                  destination_city_id: _this3.selectedDestination.id,
+                  company_id: _this3.selectedCompany.id,
+                  departure: _this3.selectedDeparture,
+                  arrival: _this3.selectedArrival
+                });
 
               case 2:
                 res = _context.sent;
+                console.log(res.status);
 
-              case 3:
+              case 4:
               case "end":
                 return _context.stop();
             }
@@ -22989,13 +22996,6 @@ var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 );
 
 var _hoisted_16 = ["min", "value"];
-
-var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-  "class": "w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-}, " Save changes ", -1
-/* HOISTED */
-);
-
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_VueMultiselect = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("VueMultiselect");
 
@@ -23066,9 +23066,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     value: $data.selectedArrival
   }, null, 40
   /* PROPS, HYDRATE_EVENTS */
-  , _hoisted_16), _hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  , _hoisted_16), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": "w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800",
     onClick: _cache[6] || (_cache[6] = function () {
+      return $options.editFlight && $options.editFlight.apply($options, arguments);
+    })
+  }, " Save changes "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    "class": "w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800",
+    onClick: _cache[7] || (_cache[7] = function () {
       return _ctx.logTime && _ctx.logTime.apply(_ctx, arguments);
     })
   }, " Discard changes ")])])])]);

@@ -56,6 +56,13 @@ class FlightController extends Controller
 
     public function update(Flight $flight, Request $request)
     {
+        $request->validate([
+            'origin_city_id' => 'required',
+            'destination_city_id' => 'required',
+            'company_id' => 'required',
+            'departure' => 'required',
+            'arrival' => 'required'
+        ]);
         $flight->update($request->all());
     }
 }

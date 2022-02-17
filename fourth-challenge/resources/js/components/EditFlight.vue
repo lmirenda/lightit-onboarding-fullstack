@@ -113,6 +113,7 @@
 
                     <button
                         class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                        @click="editFlight"
                     >
                         Save changes
                     </button>
@@ -183,7 +184,14 @@ export default {
             this.selectedArrival = e.target.value;
         },
         async editFlight() {
-            const res = await axios.put("/manage/flights/" + this.flight.id);
+            const res = await axios.put("/manage/flights/" + this.flight.id, {
+                origin_city_id: this.selectedOrigin.id,
+                destination_city_id: this.selectedDestination.id,
+                company_id: this.selectedCompany.id,
+                departure: this.selectedDeparture,
+                arrival: this.selectedArrival,
+            });
+            console.log(res.status);
         },
     },
     components: { VueMultiselect },
