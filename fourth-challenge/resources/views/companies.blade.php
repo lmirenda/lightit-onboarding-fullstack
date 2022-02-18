@@ -4,15 +4,15 @@
             <div class="w-full">
                 <div class="border-b border-gray-200 shadow">
                     <div class="container p-4">
-                        <section class="">
+                        <section>
                             <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}" />
-                            <div class="card-body">
-                                <input type="text" class="form-control mb-2" placeholder="Comapany name.." id="name" />
-                                <button onclick="addCompany()"
-                                    class="w-full text-white bg-indigo-700 hover:bg-indigo-800 focus:ring-4 focus:ring-indigo-300 font-medium rounded-lg text-sm px-8 py-2 text-center">
-                                    Register new Company
-                                </button>
-                            </div>
+
+                            <input type="text" class="form-control mb-2" placeholder="Comapany name.." id="name" />
+                            <button onclick="addCompany()"
+                                class="w-full text-white bg-indigo-700 hover:bg-indigo-800 focus:ring-4 focus:ring-indigo-300 font-medium rounded-lg text-sm px-8 py-2 text-center">
+                                Register new Company
+                            </button>
+
                         </section>
                     </div>
                     <table>

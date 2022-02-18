@@ -9,7 +9,7 @@ class CityController extends Controller
 {
     public function index()
     {
-        $cities = City::all()->sortByDesc('created_at');
+        $cities = City::orderByDesc('created_at')->paginate(6);
 
         return view('cities', ['cities' => $cities]);
     }
