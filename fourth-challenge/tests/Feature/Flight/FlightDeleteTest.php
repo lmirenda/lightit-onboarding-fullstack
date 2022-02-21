@@ -18,25 +18,10 @@ class FlightDeleteTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $company = Company::factory()->create();
-        $origin = City::factory()->create();
-        $destination = City::factory()->create();
+        $flight = Flight::factory()->create();
 
-        $flight = Flight::factory()->create([
-            'origin_city_id' => $origin['id'],
-            'destination_city_id' => $destination['id'],
-            'company_id' => $company['id'],
-            'departure' => time(),
-            'arrival' => time()
-        ]);
+        $this->delete(action([FlightController::class, 'destroy'],$flight->id));
 
-        $this
-            ->delete(action([FlightController::class, 'destroy'],$flight->id));
-
-        $this->assertDatabaseMissing(Flight::class,[
-            'origin_city_id' => $origin['id'],
-            'destination_city_id' => $destination['id'],
-            'company_id' => $company['id']
-        ]);
+        $this->assertModelMissing($flight);
     }
 }
