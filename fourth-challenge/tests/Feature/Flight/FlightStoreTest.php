@@ -23,21 +23,18 @@ class FlightStoreTest extends TestCase
         $destination = City::factory()->create();
 
         $this
-            ->post(action(FlightController::class, 'store'),[
-            'name' => 'Test Flight',
-            'origin_city_id' => $this->$origin['id'],
-            'destination_city_id' => $this->$destination['id'],
-            'company_id' => $this->$company['id'],
+            ->post(action([FlightController::class, 'store']),[
+            'origin_city_id' => $origin['id'],
+            'destination_city_id' => $destination['id'],
+            'company_id' => $company['id'],
             'departure' => time(),
             'arrival' => time()
-            ])
-            ->assertStatus(302);
+            ]);
 
         $this->assertDatabaseHas(Flight::class,[
-            'name' => 'Test Flight',
-            'origin_city_id' => $this->$origin['id'],
-            'destination_city_id' => $this->$destination['id'],
-            'company_id' => $this->$company['id']
+            'origin_city_id' => $origin['id'],
+            'destination_city_id' => $destination['id'],
+            'company_id' => $company['id']
         ]);
     }
 }
