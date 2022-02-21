@@ -38,11 +38,5 @@ class FlightIndexTest extends TestCase
                 '2022-02-03 20:41:45',
                 '2022-02-04 20:41:45',
                 ]);
-        // ->assertSeeInOrder(
-        //     [
-        //         'Kautzer LLC Airways',
-        //         'Daniel and Sons Airline'
-        //     ]
-        // );
     }
 }
