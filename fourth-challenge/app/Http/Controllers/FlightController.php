@@ -36,9 +36,12 @@ class FlightController extends Controller
             'departure' => $request->input('departure'),
             'arrival' => $request->input('arrival')
         ]);
+        $flight->load('company', 'origin', 'destination');
 
         return $flight;
     }
+    
+    
 
     public function show()
     {
@@ -66,7 +69,22 @@ class FlightController extends Controller
             'arrival' => 'required'
         ]);
         $flight->update($request->all());
-
+        $flight->load('company', 'origin', 'destination');
         return $flight;
+    }
+
+    public function flights()
+    {   
+        $flights = Flight::all();
+        $cities = City::all();
+        $companies = Company::all();
+
+        $info = array(
+            "flights" => $flights,
+            "cities" => $cities,
+            "companies"=>$companies
+          );
+      
+        return $info;
     }
 }
