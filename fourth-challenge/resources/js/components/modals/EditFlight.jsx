@@ -5,12 +5,12 @@ import SelectInput from '../SelectInput'
 import axios from 'axios'
 
 const EditFlight = () => {
-
+  const [errorMessage, setErrorMessage] = useState("")
   useEffect(() => {
-    if (editFlight !== undefined) {
-      const arrivalDate = editFlight.arrival.substring(0, 9) + "T" + editFlight.arrival.substring(11, 16)
+    if (editFlight) {
+      /* const arrivalDate = editFlight.arrival.substring(0, 9) + "T" + editFlight.arrival.substring(11, 16)
       console.log(arrivalDate)
-      setUpdatedArrival(arrivalDate)
+      setUpdatedArrival(arrivalDate) */
     }
   }, [])
 
@@ -19,25 +19,38 @@ const EditFlight = () => {
   const [updatedCompany, setUpdatedCompany] = useState(editFlight.company.id)
   const [updatedOrigin, setUpdatedOrigin] = useState(editFlight.origin.id)
   const [updatedDestination, setUpdatedDestination] = useState(editFlight.destination.id)
-  const [updatedDeparture, setUpdatedDeparture] = useState(editFlight.departure)
-  const [updatedArrival, setUpdatedArrival] = useState(editFlight.arrival)
+  const [updatedDeparture, setUpdatedDeparture] = useState(new Date(editFlight.departure).toISOString().substr(0, 16))
+  const [updatedArrival, setUpdatedArrival] = useState(new Date(editFlight.arrival).toISOString().substr(0, 16))
 
   const updateFlight = async () => {
-    /*  console.log(updatedCompany, updatedOrigin, updatedDestination, updatedDeparture, updatedArrival) */
 
-    let updatedFlight = {
-      'origin_city_id': updatedOrigin,
-      'destination_city_id': updatedDestination,
-      'company_id': updatedCompany,
-      'departure': updatedDeparture,
-      'arrival': updatedArrival
+    if (!updatedCompany || !updatedOrigin || !updatedDestination || !updatedDeparture || !updatedArrival) {
+      setErrorMessage("All fields must be completed")
     }
-    const res = await axios.put(`/manage/flights/${editFlight.id}`, updatedFlight
-    )
-      .then(resp => {
-        updateFlights(resp.data,"edit")
-        setEditModal(!editModal)
-      })
+    else if (parseInt(updatedOrigin) === parseInt(updatedDestination)) {
+      setErrorMessage("Origin city cannot be the same as arrival city")
+    }
+    else if (updatedDeparture > updatedArrival) {
+      setErrorMessage("Arrival time cannot be before departure time")
+    }
+    else {
+      setErrorMessage("")
+      let updatedFlight = {
+        'origin_city_id': updatedOrigin,
+        'destination_city_id': updatedDestination,
+        'company_id': updatedCompany,
+        'departure': updatedDeparture,
+        'arrival': updatedArrival
+      }
+      const res = await axios.put(`/manage/flights/${editFlight.id}`, updatedFlight
+      )
+        .then(resp => {
+          updateFlights(resp.data, "edit")
+          setEditModal(!editModal)
+        })
+
+    }
+    console.log(updatedDeparture)
   }
   return (
 
@@ -48,25 +61,26 @@ const EditFlight = () => {
         </svg>
       </div>
       <h2 className="mb-2 ">Edit Flight</h2>
-      <SelectInput id={"company"} label={"Company"} onChange={setUpdatedCompany} defaultValue={editFlight.company.id} options={state.companies} />
+      <SelectInput id={"company"} label={"Company"} onChange={setUpdatedCompany} options={state.companies} />
       <div className='flex mt-4'>
         <SelectInput id={"origin"} label={"Origin City"} onChange={setUpdatedOrigin} defaultValue={editFlight.origin.id} options={state.cities} />
         <SelectInput id={"destination"} label={"Destination City"} onChange={setUpdatedDestination} defaultValue={editFlight.destination.id}
-          options={state.cities.filter(city => city.id !== parseInt(updatedOrigin))} />
+          options={state.cities} />
       </div>
 
 
       <div className='flex my-4'>
         <div className='mr-2 w-full'>
           <label htmlFor="departure">Departure:</label><br />
-          <input className="border w-full rounded p-1" type="datetime-local" id="departure" max={updatedArrival} name="departure" onChange={e => setUpdatedDeparture(e.target.value)} />
+          <input className="border w-full rounded p-1" type="datetime-local" id="departure" max={updatedArrival} name="departure" value={updatedDeparture} onChange={e => setUpdatedDeparture(e.target.value)} />
         </div>
         <div className=' w-full' >
           <label htmlFor="arrival">Arrival:</label><br />
-          <input className="border w-full rounded p-1" type="datetime-local" id="arrival" name="arrival" min={updatedDeparture} onChange={e => setUpdatedArrival(e.target.value)} />
+          <input className="border w-full rounded p-1" type="datetime-local" id="arrival" name="arrival" value={updatedArrival} min={updatedDeparture} onChange={e => setUpdatedArrival(e.target.value)} />
         </div>
       </div>
       <Button text={"Save changes"} type={"primary"} onClick={updateFlight} />
+      <p>{errorMessage}</p>
 
     </div>
   )

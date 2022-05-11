@@ -1,13 +1,13 @@
 import React, { useContext } from 'react'
 import AppContext from '../context/AppContext'
-import Table from './Table'
+import FlightTable from './FlightTable'
 import Modal from './Modal'
 import EditFlight from './modals/EditFlight'
 import DeleteFlight from './modals/DeleteFlight'
 import AddFlight from './modals/AddFlight'
 import Button from './Button'
 
-const Container = () => {
+const FlightsContainer = () => {
 
     const { editModal, deleteModal, addModal, setAddModal } = useContext(AppContext)
 
@@ -16,12 +16,12 @@ const Container = () => {
     }
 
     return (
-        <div className='py-16 flex justify-center'>
-            <div >
+        <main className='py-16 flex justify-center'>
+            <section>
                 <div className='my-2'>
                     <Button type={"primary"} text={"Add flight"} onClick={handleAdd} />
                 </div>
-                <Table />
+                <FlightTable />
                 {editModal && (
                     <Modal>
                         <EditFlight />
@@ -34,10 +34,9 @@ const Container = () => {
                     <Modal>
                         <AddFlight />
                     </Modal>)}
-            </div>
-
-        </div>
+            </section>
+        </main>
     )
 }
 
-export default Container
+export default FlightsContainer

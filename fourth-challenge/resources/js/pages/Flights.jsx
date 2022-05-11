@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
-import Container from '../components/Container'
+import React from 'react'
+import ReactDOM from 'react-dom/client';
+import FlightsContainer from '../components/FlightsContainer'
 import AppContext from '../context/AppContext'
 import useInitialState from '../hooks/useInitialState'
-import { useContext } from 'react'
+
 
 export const Flights = () => {
 
@@ -10,7 +11,13 @@ export const Flights = () => {
 
     return (
         <AppContext.Provider value={initialState}>
-            <Container/>
+            <FlightsContainer />
         </AppContext.Provider>
     )
+}
+
+if (document.getElementById("react")) {
+    const domContainer = document.getElementById("react")
+    const root = ReactDOM.createRoot(domContainer);
+    root.render(<Flights />);
 }

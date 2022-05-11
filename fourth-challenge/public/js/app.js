@@ -5266,15 +5266,7 @@ module.exports = {
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
   \*****************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_dom_client__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom/client */ "./node_modules/react-dom/client.js");
-
-
+/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
 var _require = __webpack_require__(/*! ./pages/Flights */ "./resources/js/pages/Flights.jsx"),
     Flights = _require.Flights; // resoureces/js/app.js
@@ -5284,34 +5276,6 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); // React 
 
 
 __webpack_require__(/*! ./pages/Flights */ "./resources/js/pages/Flights.jsx");
-
-if (document.getElementById("react")) {
-  var domContainer = document.getElementById("react");
-  var root = react_dom_client__WEBPACK_IMPORTED_MODULE_1__.createRoot(domContainer);
-  root.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(Flights, null));
-}
-/* 
-import { createApp } from 'vue';
-import Pagination from 'v-pagination-3'; 
-
-
-require('./bootstrap');
-
-window.Vue = require('vue').default;
-
-
-const files = require.context('./', true, /\.vue$/i)
-files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
-const app = createApp({})
-app.component('flight-panel', require('./components/FlightPanel.vue').default);
-app.mount("#app");
-
-const app2 = createApp({})
-app2.component('flight-table', require('./components/FlightTable.vue').default);
-app2.component('flight-delete', require('./components/DeleteFlight.vue').default);
-app2.component('flight-edit', require('./components/EditFlight.vue').default);
-app2.component('pagination', Pagination);
-app2.mount('#app2');  */
 
 /***/ }),
 
@@ -5383,10 +5347,10 @@ var Button = function Button(_ref) {
 
 /***/ }),
 
-/***/ "./resources/js/components/Container.jsx":
-/*!***********************************************!*\
-  !*** ./resources/js/components/Container.jsx ***!
-  \***********************************************/
+/***/ "./resources/js/components/FlightTable.jsx":
+/*!*************************************************!*\
+  !*** ./resources/js/components/FlightTable.jsx ***!
+  \*************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -5397,7 +5361,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _context_AppContext__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../context/AppContext */ "./resources/js/context/AppContext.js");
-/* harmony import */ var _Table__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Table */ "./resources/js/components/Table.jsx");
+/* harmony import */ var _ItemRow__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ItemRow */ "./resources/js/components/ItemRow.jsx");
+
+
+
+
+var FlightTable = function FlightTable() {
+  var _useContext = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(_context_AppContext__WEBPACK_IMPORTED_MODULE_1__["default"]),
+      state = _useContext.state,
+      saveFlights = _useContext.saveFlights,
+      editModal = _useContext.editModal,
+      setEditModal = _useContext.setEditModal,
+      setEditFlight = _useContext.setEditFlight,
+      deleteModal = _useContext.deleteModal,
+      setDeleteModal = _useContext.setDeleteModal,
+      setDeleteFlight = _useContext.setDeleteFlight;
+
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    axios.get('/get/flights').then(function (resp) {
+      console.log(resp.data);
+      saveFlights(resp.data);
+    })["catch"](function (error) {
+      // handle error
+      console.log(error);
+    });
+  }, []);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("table", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("thead", {
+    className: "bg-indigo-100 border-gray-200"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", {
+    className: "px-6 py-2 text-xs text-gray-500"
+  }, "Flight ID"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", {
+    className: "px-6 py-2 text-xs text-gray-500"
+  }, "Company"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", {
+    className: "px-6 py-2 text-xs text-gray-500"
+  }, "Origin City"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", {
+    className: "px-6 py-2 text-xs text-gray-500"
+  }, "Destination City"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", {
+    className: "px-6 py-2 text-xs text-gray-500"
+  }, "Departure"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", {
+    className: "px-6 py-2 text-xs text-gray-500"
+  }, "Arrival"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", {
+    className: "px-6 py-2 text-xs text-gray-500"
+  }, "Administrate"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tbody", null, state.flights.map(function (flight, i) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_ItemRow__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      key: i,
+      i: i,
+      flight: flight
+    });
+  })));
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (FlightTable);
+
+/***/ }),
+
+/***/ "./resources/js/components/FlightsContainer.jsx":
+/*!******************************************************!*\
+  !*** ./resources/js/components/FlightsContainer.jsx ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _context_AppContext__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../context/AppContext */ "./resources/js/context/AppContext.js");
+/* harmony import */ var _FlightTable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./FlightTable */ "./resources/js/components/FlightTable.jsx");
 /* harmony import */ var _Modal__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Modal */ "./resources/js/components/Modal.jsx");
 /* harmony import */ var _modals_EditFlight__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modals/EditFlight */ "./resources/js/components/modals/EditFlight.jsx");
 /* harmony import */ var _modals_DeleteFlight__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modals/DeleteFlight */ "./resources/js/components/modals/DeleteFlight.jsx");
@@ -5412,7 +5444,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var Container = function Container() {
+var FlightsContainer = function FlightsContainer() {
   var _useContext = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(_context_AppContext__WEBPACK_IMPORTED_MODULE_1__["default"]),
       editModal = _useContext.editModal,
       deleteModal = _useContext.deleteModal,
@@ -5423,18 +5455,95 @@ var Container = function Container() {
     setAddModal(!addModal);
   };
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("main", {
     className: "py-16 flex justify-center"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("section", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "my-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Button__WEBPACK_IMPORTED_MODULE_7__["default"], {
     type: "primary",
     text: "Add flight",
     onClick: handleAdd
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Table__WEBPACK_IMPORTED_MODULE_2__["default"], null), editModal && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Modal__WEBPACK_IMPORTED_MODULE_3__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_modals_EditFlight__WEBPACK_IMPORTED_MODULE_4__["default"], null)), deleteModal && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Modal__WEBPACK_IMPORTED_MODULE_3__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_modals_DeleteFlight__WEBPACK_IMPORTED_MODULE_5__["default"], null)), addModal && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Modal__WEBPACK_IMPORTED_MODULE_3__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_modals_AddFlight__WEBPACK_IMPORTED_MODULE_6__["default"], null))));
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_FlightTable__WEBPACK_IMPORTED_MODULE_2__["default"], null), editModal && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Modal__WEBPACK_IMPORTED_MODULE_3__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_modals_EditFlight__WEBPACK_IMPORTED_MODULE_4__["default"], null)), deleteModal && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Modal__WEBPACK_IMPORTED_MODULE_3__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_modals_DeleteFlight__WEBPACK_IMPORTED_MODULE_5__["default"], null)), addModal && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Modal__WEBPACK_IMPORTED_MODULE_3__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_modals_AddFlight__WEBPACK_IMPORTED_MODULE_6__["default"], null))));
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Container);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (FlightsContainer);
+
+/***/ }),
+
+/***/ "./resources/js/components/ItemRow.jsx":
+/*!*********************************************!*\
+  !*** ./resources/js/components/ItemRow.jsx ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _context_AppContext__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../context/AppContext */ "./resources/js/context/AppContext.js");
+/* harmony import */ var _Button__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Button */ "./resources/js/components/Button.jsx");
+
+
+
+
+var ItemRow = function ItemRow(_ref) {
+  var i = _ref.i,
+      flight = _ref.flight;
+
+  var _useContext = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(_context_AppContext__WEBPACK_IMPORTED_MODULE_1__["default"]),
+      editModal = _useContext.editModal,
+      setEditModal = _useContext.setEditModal,
+      setEditFlight = _useContext.setEditFlight,
+      deleteModal = _useContext.deleteModal,
+      setDeleteModal = _useContext.setDeleteModal,
+      setDeleteFlight = _useContext.setDeleteFlight;
+
+  var handleEdit = function handleEdit(vuelo) {
+    setEditModal(!editModal);
+    setEditFlight(vuelo);
+  };
+
+  var handleDelete = function handleDelete(vuelo) {
+    setDeleteModal(!deleteModal);
+    setDeleteFlight(vuelo);
+  };
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", {
+    key: flight.id,
+    className: i % 2 === 0 ? "bg-gray-50" : "bg-white"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", {
+    className: "px-6 py-2 text-xs text-gray-500"
+  }, flight.id), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", {
+    className: "px-6 py-2 text-xs text-gray-500"
+  }, flight.company.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", {
+    className: "px-6 py-2 text-xs text-gray-500"
+  }, flight.origin.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", {
+    className: "px-6 py-2 text-xs text-gray-500"
+  }, flight.destination.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", {
+    className: "px-6 py-2 text-xs text-gray-500"
+  }, flight.departure), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", {
+    className: "px-6 py-2 text-xs text-gray-500"
+  }, flight.arrival), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", {
+    className: "px-6 py-2 text-xs text-gray-500"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Button__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    type: "primary",
+    text: "Edit",
+    onClick: function onClick() {
+      return handleEdit(flight);
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Button__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    type: "secondary",
+    text: "Delete",
+    onClick: function onClick() {
+      return handleDelete(flight);
+    }
+  })));
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ItemRow);
 
 /***/ }),
 
@@ -5488,7 +5597,8 @@ var SelectInput = function SelectInput(_ref) {
       label = _ref.label,
       _onChange = _ref.onChange,
       defaultValue = _ref.defaultValue,
-      options = _ref.options;
+      options = _ref.options,
+      placeholder = _ref.placeholder;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "w-full mr-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", {
@@ -5500,9 +5610,11 @@ var SelectInput = function SelectInput(_ref) {
     },
     id: id,
     name: id,
-    defaultValue: defaultValue,
+    defaultValue: defaultValue ? defaultValue : null,
     className: "border mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
-  }, options.map(function (element) {
+  }, !defaultValue && placeholder ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", {
+    value: undefined
+  }, placeholder) : null, options.map(function (element) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", {
       value: element.id,
       key: element.id,
@@ -5512,112 +5624,6 @@ var SelectInput = function SelectInput(_ref) {
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SelectInput);
-
-/***/ }),
-
-/***/ "./resources/js/components/Table.jsx":
-/*!*******************************************!*\
-  !*** ./resources/js/components/Table.jsx ***!
-  \*******************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _context_AppContext__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../context/AppContext */ "./resources/js/context/AppContext.js");
-/* harmony import */ var _Button__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Button */ "./resources/js/components/Button.jsx");
-
-
-
-
-var Table = function Table() {
-  var _useContext = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(_context_AppContext__WEBPACK_IMPORTED_MODULE_1__["default"]),
-      state = _useContext.state,
-      saveFlights = _useContext.saveFlights,
-      editModal = _useContext.editModal,
-      setEditModal = _useContext.setEditModal,
-      setEditFlight = _useContext.setEditFlight,
-      deleteModal = _useContext.deleteModal,
-      setDeleteModal = _useContext.setDeleteModal,
-      setDeleteFlight = _useContext.setDeleteFlight;
-
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    axios.get('/get/flights').then(function (resp) {
-      console.log(resp.data);
-      saveFlights(resp.data);
-    })["catch"](function (error) {
-      // handle error
-      console.log(error);
-    });
-  }, []);
-
-  var handleEdit = function handleEdit(vuelo) {
-    setEditModal(!editModal);
-    setEditFlight(vuelo);
-  };
-
-  var handleDelete = function handleDelete(vuelo) {
-    setDeleteModal(!deleteModal);
-    setDeleteFlight(vuelo);
-  };
-
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("table", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("thead", {
-    className: "bg-indigo-100 border-gray-200"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", {
-    className: "px-6 py-2 text-xs text-gray-500"
-  }, "Flight ID"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", {
-    className: "px-6 py-2 text-xs text-gray-500"
-  }, "Company"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", {
-    className: "px-6 py-2 text-xs text-gray-500"
-  }, "Origin City"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", {
-    className: "px-6 py-2 text-xs text-gray-500"
-  }, "Destination City"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", {
-    className: "px-6 py-2 text-xs text-gray-500"
-  }, "Departure"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", {
-    className: "px-6 py-2 text-xs text-gray-500"
-  }, "Arrival"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", {
-    className: "px-6 py-2 text-xs text-gray-500"
-  }, "Administrate"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tbody", {
-    className: ""
-  }, state.flights.map(function (vuelo, i) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", {
-      key: vuelo.id,
-      className: i % 2 === 0 ? "bg-gray-50" : "bg-white"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", {
-      className: "px-6 py-2 text-xs text-gray-500"
-    }, vuelo.id), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", {
-      className: "px-6 py-2 text-xs text-gray-500"
-    }, vuelo.company.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", {
-      className: "px-6 py-2 text-xs text-gray-500"
-    }, vuelo.origin.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", {
-      className: "px-6 py-2 text-xs text-gray-500"
-    }, vuelo.destination.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", {
-      className: "px-6 py-2 text-xs text-gray-500"
-    }, vuelo.departure), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", {
-      className: "px-6 py-2 text-xs text-gray-500"
-    }, vuelo.arrival), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", {
-      className: "px-6 py-2 text-xs text-gray-500"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Button__WEBPACK_IMPORTED_MODULE_2__["default"], {
-      type: "primary",
-      text: "Edit",
-      onClick: function onClick() {
-        return handleEdit(vuelo);
-      }
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Button__WEBPACK_IMPORTED_MODULE_2__["default"], {
-      type: "secondary",
-      text: "Delete",
-      onClick: function onClick() {
-        return handleDelete(vuelo);
-      }
-    })));
-  })));
-};
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Table);
 
 /***/ }),
 
@@ -5672,17 +5678,17 @@ var AddFlight = function AddFlight() {
       setAddModal = _useContext.setAddModal,
       addModal = _useContext.addModal;
 
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(state.companies[0].id),
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(),
       _useState2 = _slicedToArray(_useState, 2),
       company = _useState2[0],
       setCompany = _useState2[1];
 
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(state.cities[0].id),
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(),
       _useState4 = _slicedToArray(_useState3, 2),
       origin = _useState4[0],
       setOrigin = _useState4[1];
 
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(state.cities[1].id),
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(),
       _useState6 = _slicedToArray(_useState5, 2),
       destination = _useState6[0],
       setDestination = _useState6[1];
@@ -5699,8 +5705,8 @@ var AddFlight = function AddFlight() {
 
   var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(""),
       _useState12 = _slicedToArray(_useState11, 2),
-      error = _useState12[0],
-      setError = _useState12[1];
+      errorMessage = _useState12[0],
+      setErrorMessage = _useState12[1];
 
   var addFlight = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
@@ -5709,21 +5715,37 @@ var AddFlight = function AddFlight() {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              console.log("agregar vuelo");
-
-              if (!(company === undefined || origin === undefined || destination === undefined || departure === undefined || arrival === undefined)) {
-                _context.next = 5;
+              if (!(!company || !origin || !destination || !departure || !arrival)) {
+                _context.next = 4;
                 break;
               }
 
-              /*   console.log(company, origin, destination, departure, arrival) */
-              setError("No puede haber campos vacíos");
-              _context.next = 11;
+              setErrorMessage("All fields must be completed");
+              _context.next = 17;
               break;
 
-            case 5:
-              setError("");
-              console.log(company, origin, destination, departure, arrival);
+            case 4:
+              if (!(parseInt(origin) === parseInt(destination))) {
+                _context.next = 8;
+                break;
+              }
+
+              setErrorMessage("Origin city cannot be the same as arrival city");
+              _context.next = 17;
+              break;
+
+            case 8:
+              if (!(departure > arrival)) {
+                _context.next = 12;
+                break;
+              }
+
+              setErrorMessage("Arrival time cannot be before departure time");
+              _context.next = 17;
+              break;
+
+            case 12:
+              setErrorMessage("");
               newFlight = {
                 'origin_city_id': origin,
                 'destination_city_id': destination,
@@ -5731,16 +5753,16 @@ var AddFlight = function AddFlight() {
                 'departure': departure,
                 'arrival': arrival
               };
-              _context.next = 10;
+              _context.next = 16;
               return axios__WEBPACK_IMPORTED_MODULE_5___default().post("/manage/flights/", newFlight).then(function (resp) {
                 updateFlights(resp.data, "add");
                 setAddModal(!addModal);
               });
 
-            case 10:
+            case 16:
               res = _context.sent;
 
-            case 11:
+            case 17:
             case "end":
               return _context.stop();
           }
@@ -5775,7 +5797,7 @@ var AddFlight = function AddFlight() {
     id: "company",
     label: "Company",
     onChange: setCompany,
-    defaultValue: company,
+    placeholder: "Select company",
     options: state.companies
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
     className: "flex mt-4"
@@ -5783,12 +5805,12 @@ var AddFlight = function AddFlight() {
     id: "origin",
     label: "Origin City",
     onChange: setOrigin,
-    defaultValue: origin,
+    placeholder: "Select departure city",
     options: state.cities
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_SelectInput__WEBPACK_IMPORTED_MODULE_4__["default"], {
     id: "destination",
     label: "Destination City",
-    defaultValue: destination,
+    placeholder: "Select arrival city",
     onChange: setDestination,
     options: state.cities.filter(function (city) {
       return city.id !== parseInt(origin);
@@ -5802,8 +5824,9 @@ var AddFlight = function AddFlight() {
   }, "Departure:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("input", {
     className: "border w-full rounded p-1",
     type: "datetime-local",
-    id: "departure",
-    max: arrival,
+    id: "departure"
+    /*  max={arrival} */
+    ,
     name: "departure",
     onChange: function onChange(e) {
       return setDeparture(e.target.value);
@@ -5816,12 +5839,13 @@ var AddFlight = function AddFlight() {
     className: "border w-full rounded p-1",
     type: "datetime-local",
     id: "arrival",
-    name: "arrival",
-    min: departure,
+    name: "arrival"
+    /* min={departure} */
+    ,
     onChange: function onChange(e) {
       return setArrival(e.target.value);
     }
-  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("p", null, error), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("p", null, errorMessage), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
     text: "Add flight",
     type: "primary",
     onClick: addFlight
@@ -5979,11 +6003,16 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var EditFlight = function EditFlight() {
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(""),
+      _useState2 = _slicedToArray(_useState, 2),
+      errorMessage = _useState2[0],
+      setErrorMessage = _useState2[1];
+
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
-    if (editFlight !== undefined) {
-      var arrivalDate = editFlight.arrival.substring(0, 9) + "T" + editFlight.arrival.substring(11, 16);
-      console.log(arrivalDate);
-      setUpdatedArrival(arrivalDate);
+    if (editFlight) {
+      /* const arrivalDate = editFlight.arrival.substring(0, 9) + "T" + editFlight.arrival.substring(11, 16)
+      console.log(arrivalDate)
+      setUpdatedArrival(arrivalDate) */
     }
   }, []);
 
@@ -5995,30 +6024,30 @@ var EditFlight = function EditFlight() {
       setEditModal = _useContext.setEditModal,
       editModal = _useContext.editModal;
 
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(editFlight.company.id),
-      _useState2 = _slicedToArray(_useState, 2),
-      updatedCompany = _useState2[0],
-      setUpdatedCompany = _useState2[1];
-
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(editFlight.origin.id),
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(editFlight.company.id),
       _useState4 = _slicedToArray(_useState3, 2),
-      updatedOrigin = _useState4[0],
-      setUpdatedOrigin = _useState4[1];
+      updatedCompany = _useState4[0],
+      setUpdatedCompany = _useState4[1];
 
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(editFlight.destination.id),
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(editFlight.origin.id),
       _useState6 = _slicedToArray(_useState5, 2),
-      updatedDestination = _useState6[0],
-      setUpdatedDestination = _useState6[1];
+      updatedOrigin = _useState6[0],
+      setUpdatedOrigin = _useState6[1];
 
-  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(editFlight.departure),
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(editFlight.destination.id),
       _useState8 = _slicedToArray(_useState7, 2),
-      updatedDeparture = _useState8[0],
-      setUpdatedDeparture = _useState8[1];
+      updatedDestination = _useState8[0],
+      setUpdatedDestination = _useState8[1];
 
-  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(editFlight.arrival),
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(new Date(editFlight.departure).toISOString().substr(0, 16)),
       _useState10 = _slicedToArray(_useState9, 2),
-      updatedArrival = _useState10[0],
-      setUpdatedArrival = _useState10[1];
+      updatedDeparture = _useState10[0],
+      setUpdatedDeparture = _useState10[1];
+
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(new Date(editFlight.arrival).toISOString().substr(0, 16)),
+      _useState12 = _slicedToArray(_useState11, 2),
+      updatedArrival = _useState12[0],
+      setUpdatedArrival = _useState12[1];
 
   var updateFlight = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
@@ -6027,7 +6056,37 @@ var EditFlight = function EditFlight() {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              /*  console.log(updatedCompany, updatedOrigin, updatedDestination, updatedDeparture, updatedArrival) */
+              if (!(!updatedCompany || !updatedOrigin || !updatedDestination || !updatedDeparture || !updatedArrival)) {
+                _context.next = 4;
+                break;
+              }
+
+              setErrorMessage("All fields must be completed");
+              _context.next = 17;
+              break;
+
+            case 4:
+              if (!(parseInt(updatedOrigin) === parseInt(updatedDestination))) {
+                _context.next = 8;
+                break;
+              }
+
+              setErrorMessage("Origin city cannot be the same as arrival city");
+              _context.next = 17;
+              break;
+
+            case 8:
+              if (!(updatedDeparture > updatedArrival)) {
+                _context.next = 12;
+                break;
+              }
+
+              setErrorMessage("Arrival time cannot be before departure time");
+              _context.next = 17;
+              break;
+
+            case 12:
+              setErrorMessage("");
               updatedFlight = {
                 'origin_city_id': updatedOrigin,
                 'destination_city_id': updatedDestination,
@@ -6035,16 +6094,19 @@ var EditFlight = function EditFlight() {
                 'departure': updatedDeparture,
                 'arrival': updatedArrival
               };
-              _context.next = 3;
+              _context.next = 16;
               return axios__WEBPACK_IMPORTED_MODULE_5___default().put("/manage/flights/".concat(editFlight.id), updatedFlight).then(function (resp) {
                 updateFlights(resp.data, "edit");
                 setEditModal(!editModal);
               });
 
-            case 3:
+            case 16:
               res = _context.sent;
 
-            case 4:
+            case 17:
+              console.log(updatedDeparture);
+
+            case 18:
             case "end":
               return _context.stop();
           }
@@ -6079,7 +6141,6 @@ var EditFlight = function EditFlight() {
     id: "company",
     label: "Company",
     onChange: setUpdatedCompany,
-    defaultValue: editFlight.company.id,
     options: state.companies
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
     className: "flex mt-4"
@@ -6094,9 +6155,7 @@ var EditFlight = function EditFlight() {
     label: "Destination City",
     onChange: setUpdatedDestination,
     defaultValue: editFlight.destination.id,
-    options: state.cities.filter(function (city) {
-      return city.id !== parseInt(updatedOrigin);
-    })
+    options: state.cities
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
     className: "flex my-4"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
@@ -6109,6 +6168,7 @@ var EditFlight = function EditFlight() {
     id: "departure",
     max: updatedArrival,
     name: "departure",
+    value: updatedDeparture,
     onChange: function onChange(e) {
       return setUpdatedDeparture(e.target.value);
     }
@@ -6121,6 +6181,7 @@ var EditFlight = function EditFlight() {
     type: "datetime-local",
     id: "arrival",
     name: "arrival",
+    value: updatedArrival,
     min: updatedDeparture,
     onChange: function onChange(e) {
       return setUpdatedArrival(e.target.value);
@@ -6129,7 +6190,7 @@ var EditFlight = function EditFlight() {
     text: "Save changes",
     type: "primary",
     onClick: updateFlight
-  }));
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("p", null, errorMessage));
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (EditFlight);
@@ -6312,20 +6373,27 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _components_Container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/Container */ "./resources/js/components/Container.jsx");
-/* harmony import */ var _context_AppContext__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../context/AppContext */ "./resources/js/context/AppContext.js");
-/* harmony import */ var _hooks_useInitialState__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../hooks/useInitialState */ "./resources/js/hooks/useInitialState.js");
+/* harmony import */ var react_dom_client__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom/client */ "./node_modules/react-dom/client.js");
+/* harmony import */ var _components_FlightsContainer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/FlightsContainer */ "./resources/js/components/FlightsContainer.jsx");
+/* harmony import */ var _context_AppContext__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../context/AppContext */ "./resources/js/context/AppContext.js");
+/* harmony import */ var _hooks_useInitialState__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../hooks/useInitialState */ "./resources/js/hooks/useInitialState.js");
 
 
 
 
 
 var Flights = function Flights() {
-  var initialState = (0,_hooks_useInitialState__WEBPACK_IMPORTED_MODULE_3__["default"])();
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_context_AppContext__WEBPACK_IMPORTED_MODULE_2__["default"].Provider, {
+  var initialState = (0,_hooks_useInitialState__WEBPACK_IMPORTED_MODULE_4__["default"])();
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_context_AppContext__WEBPACK_IMPORTED_MODULE_3__["default"].Provider, {
     value: initialState
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Container__WEBPACK_IMPORTED_MODULE_1__["default"], null));
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_FlightsContainer__WEBPACK_IMPORTED_MODULE_2__["default"], null));
 };
+
+if (document.getElementById("react")) {
+  var domContainer = document.getElementById("react");
+  var root = react_dom_client__WEBPACK_IMPORTED_MODULE_1__.createRoot(domContainer);
+  root.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(Flights, null));
+}
 
 /***/ }),
 
