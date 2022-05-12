@@ -9,6 +9,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/get/flights', [FlightController::class, 'flights']);
+
 Route::get('/manage/cities', [CityController::class, 'index']);
 
 Route::get('/manage/companies', [CompanyController::class, 'index']);
